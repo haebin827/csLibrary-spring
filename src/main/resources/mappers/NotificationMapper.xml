@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.library.libraryspring.mapper.NotificationMapper">
+
+    <insert id="insert">
+        insert into notifications (n_title, n_content, n_isImp) values ( #{n_title}, #{n_content}, #{n_isImp})
+    </insert>
+
+    <select id="selectAll" resultType="edu.library.libraryspring.domain.NotificationVO">
+        select * from notifications order by n_no desc
+    </select>
+
+    <select id="selectOne" resultType="edu.library.libraryspring.domain.NotificationVO">
+        select * from notifications where n_no = #{n_no}
+    </select>
+
+    <delete id="delete">
+        delete from notifications where n_no = #{n_no}
+    </delete>
+
+    <update id="update">
+        update notifications set n_title = #{n_title}, n_content = #{n_content}, n_isImp = #{n_isImp} where n_no = #{n_no}
+    </update>
+
+    <select id="selectList" resultType="edu.library.libraryspring.domain.NotificationVO">
+        select * from notifications order by n_no desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(n_no) from notifications
+    </select>
+
+</mapper>

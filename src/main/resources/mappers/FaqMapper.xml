@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.library.libraryspring.mapper.FaqMapper">
+
+    <insert id="insert">
+        insert into faqs(f_question, f_answer) values ( #{f_question}, #{f_answer})
+    </insert>
+
+    <select id="selectAll" resultType="edu.library.libraryspring.domain.FaqVO">
+        select * from faqs order by f_id asc
+    </select>
+
+    <select id="selectOne" resultType="edu.library.libraryspring.domain.FaqVO">
+        select * from faqs where f_id = #{f_id}
+    </select>
+
+    <delete id="delete">
+        delete from faqs where f_id = #{f_id}
+    </delete>
+
+    <update id="update">
+        update faqs set f_question = #{f_question}, f_answer = #{f_answer} where f_id = #{f_id}
+    </update>
+
+    <select id="selectList" resultType="edu.library.libraryspring.domain.FaqVO">
+        select * from faqs order by f_id asc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(f_id) from faqs
+    </select>
+
+</mapper>

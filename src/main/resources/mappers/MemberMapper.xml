@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.library.libraryspring.mapper.MemberMapper">
+
+    <select id="selectAll" resultType="edu.library.libraryspring.domain.MemberVO">
+        select * from members order by m_regDate desc
+    </select>
+
+    <select id="selectOne" resultType="edu.library.libraryspring.domain.MemberVO">
+        select * from members where m_id = #{m_id}
+    </select>
+
+    <delete id="delete">
+        delete from members where m_id = #{m_id}
+    </delete>
+
+    <select id="selectList" resultType="edu.library.libraryspring.domain.MemberVO">
+        select * from members order by m_regDate desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(m_id) from members
+    </select>
+
+    <!--
+    <select id="userAuthenticate" resultType="int">
+        select count(*) from members where m_id = #{m_id} AND m_pw = #{m_pw} AND m_no != 1
+    </select>
+
+    <select id="adminAuthenticate" resultType="int">
+        select count(*) from members where m_id = #{m_id} AND m_pw = #{m_pw} AND m_no = 1
+    </select>
+    -->
+
+    <select id="authenticate" resultType="edu.library.libraryspring.domain.MemberVO">
+        select * from members where m_id = #{m_id} AND m_pw = #{m_pw}
+    </select>
+
+    <select id="updateUuid">
+        update members set m_uuid = #{m_uuid} where m_id = #{m_id}
+    </select>
+
+    <select id="selectUUID" resultType="edu.library.libraryspring.domain.MemberVO">
+        select m_no, m_id, m_pw, m_name, m_uuid from members where m_uuid = #{m_uuid}
+    </select>
+
+    <select id="insert">
+        insert into members(m_no, m_id, m_pw, m_name, m_phone) values ( #{m_no}, #{m_id}, #{m_pw}, #{m_name}, #{m_phone})
+    </select>
+
+    <select id="checkPhone" resultType="int">
+        select count(*) from members where m_phone = #{m_phone}
+    </select>
+
+    <select id="checkId" resultType="int">
+        select count(*) from members where m_id = #{m_id}
+    </select>
+
+</mapper>
